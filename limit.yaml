@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: resource-limit-demo
+spec:
+  containers:
+  - name: stress
+    image: busybox
+    # WIP
+    command:
+      - sh
+      - -c
+      - |
+        echo "Starting memory stress..."
+        while true; do
+          # Allocate ~10Mi in RAM
+          a=$(head -c 10M /dev/zero | tr '\0' 'A')
+        done
+    resources:
+      requests:
+        cpu: "100m"
+        memory: "64Mi"
+      limits:
+        cpu: "200m"
+        memory: "128Mi"
+  restartPolicy: Never
