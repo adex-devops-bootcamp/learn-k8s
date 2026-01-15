@@ -1,23 +1,24 @@
-## ConfigMaps and Secrets
+## Lab 1
+### ConfigMaps and Secrets
 
 - Create a configmap and a secret.
 - kubectl describe both resources.
 - Secrets are base64 encoded when stringData used. (stringData vs data).
 - Opaque tells K8s to not assume the format/type of data.
-- kubectl exec -ti <pod_name> env vs <pod_name> -- env
+- `kubectl exec <pod_name> -- env`
 
-## PersistentVolume (PV) & PersistentVolumeClaim (PVC)
+### PersistentVolume (PV) & PersistentVolumeClaim (PVC)
 
 - Pods and containers are ephemeral.
 - PV is a disk that can exist before applications.
 - Examples of PV: AWS EBS, Local Disk.
 - Pod → uses → PVC → binds to → PV → Actual Disk
-- kubectl exec pv-pod -- cat /data/hello.txt
-- Delete the pod: kubectl delete pod pv-pod
+- `kubectl exec pv-pod -- cat /data/hello.txt`
+- Delete the pod: `kubectl delete pod pv-pod`
 - Recreate the pod and check again if the data persists.
 
 
-## StatefulSets
+### StatefulSets
 
 - Most Kubernetes workloads are stateless.
 - A simple example is how pods are created with random names.
@@ -27,3 +28,16 @@
 - Create pods in order: 0 → 1 → 2
 - Delete pods in reverse order: 2 → 1 → 0
 - Deleting a StatefulSet: Does NOT delete PVCs, Deletes pods
+
+## Lab 2
+### Service
+- ClusterIP, NodePort and LoadBalancer
+- Headless Service
+- labels/selectors connect Pods to Services (Lab 1 StatefulSets)
+- How does traffic reach a pod if pod IPs change?
+
+### Ingress
+- Ingress vs Service
+- Ingress Controller
+- Client → Ingress → Service → Pod
+- minikube addons enable ingress
