@@ -41,3 +41,11 @@
 - Ingress Controller
 - Client → Ingress → Service → Pod
 - minikube addons enable ingress
+
+### Horizontal Pod Autoscaler (HPA)
+- Scaling pods (not nodes) based on CPU/memory
+- Metrics is needed first from metrics server or custom metrics
+- `minikube addons enable metrics-server`
+- Also explore `kubectl top`
+- Why it needs resource requests (not limits)
+- Overrides `replicas:` in deployments and replicaSets
