@@ -49,3 +49,10 @@
 - Also explore `kubectl top`
 - Why it needs resource requests (not limits)
 - Overrides `replicas:` in deployments and replicaSets
+
+### Rolling Updates
+- strategy: RollingUpdate vs Recreate
+- maxSurge, maxUnavailable:
+- Both cannot be 0, at least one needs to progress.
+- Is NOT Blue/Green or Canary Deployment strategies
+- If maxUnavailable = 0, still zero downtime, but slower rollout.
