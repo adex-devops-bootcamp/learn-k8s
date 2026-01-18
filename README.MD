@@ -58,11 +58,19 @@
 - If maxUnavailable = 0, still zero downtime, but slower rollout.
 
 ## Lab 3
+### DaemonSet
 - `minikube status` after `minikube start`
 - `kubectl get nodes` and `minikube node list`
 - `minikube node add`
 - Repeat Step 2.
 - Alternately, `minikube delete` to delete cluster and `minikube start --nodes=3`
 - `--nodes=3`, control plane is counted as one node here.
+- `kubectl get daemonsets` and `kubectl describe`
 - `kubectl get pods -o wide` used to display additional information like in which node a pod is running.
 - `kubectl logs <pod-name>`
+
+### Jobs and CronJobs
+- Most Kubernetes workloads (Deployments, StatefulSets) are long-running.
+- Jobs ensures a Pod runs to completion.
+- Retries on failure, Can run: Once, Multiple times in parallel and Until 'N' successful completions
+- CronJobs run using the kube-controller-manager timezone (not the Pod’s).
