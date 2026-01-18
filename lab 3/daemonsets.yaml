@@ -24,11 +24,14 @@ spec:
             while true; do
               echo "==== Node Metrics ===="
               echo "Node: $(hostname) IP: $(hostname -i)"
-              echo "CPU Load: $(cat /proc/loadavg)"
-              echo "Memory: $(free -h | grep Mem)"
-              echo "Disk: $(df -h / | tail -1)"
+              echo "==== CPU Load ===="
+              echo "$(cat /proc/loadavg)"
+              echo "==== Memory: ===="
+              echo "$(free -h)"
+              echo "==== Disk ===="
+              echo "$(df -h / | tail -1)"
               echo "---------------------"
-              sleep 10
+              sleep 20
             done
         volumeMounts:
         - name: host-proc
