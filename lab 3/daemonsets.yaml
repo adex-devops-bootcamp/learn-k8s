@@ -20,19 +20,16 @@ spec:
         command: ["/bin/sh", "-c"]
         args:
           - |
-            apk add --no-cache procps coreutils &&
-            while true; do
-              echo "==== Node Metrics ===="
-              echo "Node: $(hostname) IP: $(hostname -i)"
-              echo "==== CPU Load ===="
-              echo "$(cat /proc/loadavg)"
-              echo "==== Memory: ===="
-              echo "$(free -h)"
-              echo "==== Disk ===="
-              echo "$(df -h / | tail -1)"
-              echo "---------------------"
-              sleep 20
-            done
+            apk add --no-cache procps coreutils
+            echo "==== Node Metrics ===="
+            echo "Node: $(hostname) IP: $(hostname -i)"
+            echo "==== CPU Load ===="
+            echo "$(cat /proc/loadavg)"
+            echo "==== Memory: ===="
+            echo "$(free -h)"
+            echo "==== Disk ===="
+            echo "$(df -h / | tail -1)"
+            echo "---------------------"
         volumeMounts:
         - name: host-proc
           mountPath: /proc
