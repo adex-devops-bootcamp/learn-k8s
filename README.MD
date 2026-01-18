@@ -64,3 +64,5 @@
 - Repeat Step 2.
 - Alternately, `minikube delete` to delete cluster and `minikube start --nodes=3`
 - `--nodes=3`, control plane is counted as one node here.
+- `kubectl get <resource> -o wide` used to display additional information like in which node a resource is running.
+- `kubectl label pod <pod-name> node-name=minikube` to label pods if needed.
