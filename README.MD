@@ -56,3 +56,11 @@
 - Both cannot be 0, at least one needs to progress.
 - Is NOT Blue/Green or Canary Deployment strategies
 - If maxUnavailable = 0, still zero downtime, but slower rollout.
+
+## Lab 3
+- `minikube status` after `minikube start`
+- `kubectl get nodes` and `minikube node list`
+- `minikube node add`
+- Repeat Step 2.
+- Alternately, `minikube delete` to delete cluster and `minikube start --nodes=3`
+- `--nodes=3`, control plane is counted as one node here.
