@@ -1,58 +1,46 @@
 apiVersion: apps/v1
 kind: DaemonSet
 metadata:
-  name: node-info
+  name: node-metrics
   labels:
-    app: node-info
+    app: node-metrics
 spec:
   selector:
     matchLabels:
-      app: node-info
+      app: node-metrics
   template:
     metadata:
       labels:
-        app: node-info
+        app: node-metrics
     spec:
+      hostNetwork: true     # so we can see host IP
       containers:
-      - name: node-info
+      - name: metrics
         image: alpine:3.18
         command: ["/bin/sh", "-c"]
         args:
-          - >
+          - |
             apk add --no-cache procps coreutils &&
             while true; do
-              echo "Node: $(hostname -i)" > /tmp/index.html;
-              echo "CPU Load: $(cat /proc/loadavg)" >> /tmp/index.html;
-              echo "Memory: $(free -h | grep Mem)" >> /tmp/index.html;
-              echo "Disk: $(df -h / | tail -1)" >> /tmp/index.html;
-              sleep 5;
+              echo "==== Node Metrics ===="
+              echo "Node: $(hostname) IP: $(hostname -i)"
+              echo "CPU Load: $(cat /proc/loadavg)"
+              echo "Memory: $(free -h | grep Mem)"
+              echo "Disk: $(df -h / | tail -1)"
+              echo "---------------------"
+              sleep 10
             done
-        ports:
-        - containerPort: 80
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: node-info-ingress
-spec:
-  rules:
-  - host: node1.local
-    http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: node-info-node1
-            port:
-              number: 80
-  - host: node2.local
-    http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: node-info-node2
-            port:
-              number: 80
+        volumeMounts:
+        - name: host-proc
+          mountPath: /proc
+          readOnly: true
+        - name: host-root
+          mountPath: /host
+          readOnly: true
+      volumes:
+      - name: host-proc
+        hostPath:
+          path: /proc
+      - name: host-root
+        hostPath:
+          path: /
