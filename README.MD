@@ -74,3 +74,15 @@
 - Jobs ensures a Pod runs to completion.
 - Retries on failure, Can run: Once, Multiple times in parallel and Until 'N' successful completions
 - CronJobs run using the kube-controller-manager timezone (not the Pod’s).
+
+## Lab 4
+### Helm
+- Package Manager for Kubernetes (just like apt)
+- `sudo snap install helm --classic`
+- `helm version`
+- Package Managers maintain Package Repositories: `helm repo list`
+- `helm repo add autoscaler https://kubernetes.github.io/autoscaler`
+- `helm repo list`
+- `helm search repo autoscaler`
+- Charts and Releases
+- `helm template test autoscaler/cluster-autoscaler`
