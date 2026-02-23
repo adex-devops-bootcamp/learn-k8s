@@ -10,3 +10,6 @@ rbac:
 serviceAccount:
   create: true
   name: cluster-autoscaler
+
+extraArgs:
+  skip-nodes-with-system-pods: false
