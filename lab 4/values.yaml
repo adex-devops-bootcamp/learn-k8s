@@ -1,0 +1,14 @@
+cloudProvider: aws
+awsRegion: us-east-1
+
+autoDiscovery:
+  clusterName: <EKS_CLUSTER_NAME>
+
+rbac:
+  create: true
+
+serviceAccount:
+  create: true
+  name: cluster-autoscaler
+  annotations:
+    eks.amazonaws.com/role-arn: <CLUSTER_AUTOSCALER_IAM_ROLE_ARN>
