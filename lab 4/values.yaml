@@ -10,5 +10,3 @@ rbac:
 serviceAccount:
   create: true
   name: cluster-autoscaler
-  annotations:
-    eks.amazonaws.com/role-arn: <CLUSTER_AUTOSCALER_IAM_ROLE_ARN>
